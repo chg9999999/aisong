@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    --radius: 0.5rem;
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-[#0a0a0f] text-gray-200;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+/* 自定义容器流体布局 */
+.container-fluid {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1400px; /* 调整为与container一致的1400px */
+  padding-left: 2rem; /* 添加与container一致的内边距 */
+  padding-right: 2rem; /* 添加与container一致的内边距 */
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(20, 20, 30, 0.6);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, rgba(139, 92, 246, 0.4), rgba(59, 130, 246, 0.4));
+  border-radius: 8px;
+  border: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, rgba(139, 92, 246, 0.6), rgba(59, 130, 246, 0.6));
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.4);
+}
+
+::-webkit-scrollbar-corner {
+  background: rgba(20, 20, 30, 0.6);
+}
+
+/* Gradient text animation */
+.animate-gradientFlow {
+  background-size: 200% 200%;
+}
+
+/* Fix for dropdown menus */
+.select-content {
+  @apply bg-gray-900 text-gray-200 border-purple-500/30;
+}
+
+.select-item {
+  @apply text-gray-200 focus:bg-purple-800 focus:text-white;
+}
+
+.select-item[data-highlighted] {
+  @apply bg-purple-800 text-white;
+}
+
+.select-item[data-state="checked"] {
+  @apply bg-purple-700 text-white;
+}
+
+/* Custom switch styling */
+.switch[data-state="checked"] {
+  @apply bg-gradient-to-r from-purple-600 to-blue-600;
+}
+
+.switch[data-state="unchecked"] {
+  @apply bg-gray-700;
+}
+
+/* Fix input focus styles */
+.input:focus,
+.textarea:focus,
+.select:focus {
+  @apply border-purple-500 ring-0 ring-offset-0;
+}
+
+/* Header specific styles */
+header {
+  min-height: 0;
+}
+
+header nav a {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
