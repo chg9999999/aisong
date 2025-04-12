@@ -884,27 +884,11 @@ ai-music/
 - **API接口**: `app/api/mp4/generate/route.ts`
 
 **工作流程**:
-1. 用户选择或上传音乐
+1. 用户选择音乐
 2. 设置视频生成参数
 3. 提交生成请求
 4. AI生成与音乐匹配的视频内容
 
-### 3.7 任务管理系统
-管理所有AI处理任务，是整个系统的核心。
-
-- **任务管理器**: `services/taskManager.ts`（466行）
-- **任务钩子**: `hooks/useTaskManager.tsx`
-- **任务界面组件**: `components/task-list.tsx`和`components/task-progress.tsx`
-- **任务API**: `app/api/tasks/[taskId]/route.ts`
-
-**工作流程**:
-1. 用户提交AI处理请求
-2. 系统创建任务记录
-3. 定期检查任务状态
-4. 任务完成后通知界面更新
-5. 界面展示任务结果
-
-**新手提示**：任务管理系统是连接用户界面和AI服务的核心，理解它的工作原理对掌握整个系统非常重要。
 
 ## 4. 数据流向（新手必读）
 
@@ -914,8 +898,6 @@ ai-music/
 2. **业务逻辑处理**: 通过钩子函数(如`useGenerateMusic.ts`)处理用户输入，进行表单验证
 3. **API请求**: 钩子函数调用本地API(`app/api/generate/route.ts`)，传递处理参数
 4. **外部API调用**: 本地API通过`services/api.ts`调用外部AI服务(如Suno API)
-5. **任务创建**: 在`services/taskManager.ts`中创建任务记录，生成唯一ID
-6. **状态轮询**: 前端定期查询任务状态(`app/api/tasks/[taskId]/route.ts`)
 7. **存储处理**: 系统将结果存储到Cloudflare R2并更新任务状态
 8. **状态更新**: 前端轮询检测到任务完成，更新UI界面状态
 9. **结果展示**: 在音乐播放器(`music-player.tsx`或`floating-player.tsx`)中展示结果
