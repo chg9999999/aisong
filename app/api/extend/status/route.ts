@@ -76,25 +76,35 @@ export async function GET(request: NextRequest) {
       const audio = data.response.sunoData[0];
       const paramObj = JSON.parse(data.param || '{}');
       
+      // 记录原始数据结构以便调试
+      console.log('[API] 原始音频数据:', JSON.stringify(audio, null, 2));
+      console.log('[API] 参数对象:', paramObj);
+      console.log('[API] 原始音频ID:', data.parentMusicId || paramObj.audioId);
+      
       // 创建标准化的结果对象
       result.result = {
         taskId: data.taskId,
         originalAudioId: data.parentMusicId || paramObj.audioId,
-        extendedMusic: {
+        // 将单个对象改为数组格式，保持与前端代码兼容
+        sunoData: [{
           id: audio.id,
           title: audio.title,
           audioUrl: audio.audio_url || audio.source_audio_url,
           streamAudioUrl: audio.stream_audio_url || audio.source_stream_audio_url,
           imageUrl: audio.image_url || audio.source_image_url,
+          sourceImageUrl: audio.source_image_url,
           prompt: audio.prompt,
-          tags: audio.tags ? (typeof audio.tags === 'string' ? audio.tags.split(',') : audio.tags) : [],
+          tags: audio.tags ? (typeof audio.tags === 'string' ? audio.tags : audio.tags.join(',')) : '',
           duration: audio.duration,
-          createdAt: audio.createTime,
-          model: audio.model_name
-        },
+          createTime: audio.createTime,
+          modelName: audio.model_name
+        }],
         continueAtPosition: paramObj.continueAt || 0,
         createdAt: audio.createTime || new Date().toISOString()
       };
+      
+      // 记录处理后的音频数据
+      console.log('[API] 处理后的扩展音频数据:', JSON.stringify(result.result.sunoData[0], null, 2));
     }
     
     // 如果任务失败，则设置错误信息

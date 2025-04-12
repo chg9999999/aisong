@@ -117,7 +117,7 @@ export async function POST(request: NextRequest) {
           }),
         });
         
-        console.log('[API] 成功创建本地扩展任务记录:', taskId);
+        console.log('[API] 成功创建扩展任务记录:', taskId);
       } catch (error) {
         console.error('[API] 创建本地扩展任务记录失败:', error);
       }

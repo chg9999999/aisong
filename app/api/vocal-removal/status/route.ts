@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { serverFetch } from '@/services/api';
+import { VocalRemovalResult } from '@/types/music';
+import { TaskStatus } from '@/types/api';
 
 // 定义响应类型
 interface ApiResponse {
@@ -16,7 +18,7 @@ interface ApiResponse {
       instrumentalUrl: string;
       vocalUrl: string;
     };
-    successFlag: string;
+    successFlag: TaskStatus;
     createTime: string;
     errorCode: string | null;
     errorMessage: string | null;
@@ -79,7 +81,7 @@ export async function GET(request: NextRequest) {
     
     // 根据successFlag判断任务状态
     let status = 'PENDING';
-    if (taskData.successFlag === 'SUCCESS' || taskData.successFlag === 'success') {
+    if (taskData.successFlag === 'SUCCESS') {
       status = 'SUCCESS';
     } else if (
       taskData.successFlag === 'CREATE_TASK_FAILED' || 
@@ -89,8 +91,8 @@ export async function GET(request: NextRequest) {
     ) {
       status = 'ERROR';
     } else if (
-      taskData.successFlag === 'PROCESSING' ||
-      taskData.successFlag === 'processing'
+      // API可能返回非枚举中的值，使用字符串比较
+      String(taskData.successFlag).toUpperCase() === 'PROCESSING'
     ) {
       status = 'PROCESSING';
     }

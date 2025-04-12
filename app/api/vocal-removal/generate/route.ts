@@ -1,6 +1,6 @@
 import { serverFetch } from '@/services/api';
 import { NextRequest, NextResponse } from 'next/server';
-import { VocalRemovalParams } from '@/types';
+import { VocalRemovalParams } from '@/types/api';
 
 // 服务器端API端点
 const API_ENDPOINT = '/api/v1/vocal-removal/generate';

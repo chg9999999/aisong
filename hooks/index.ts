@@ -18,17 +18,3 @@ export { useMusicExtensionPolling } from './business/useMusicExtensionPolling';
 export { useWavConversionPolling } from './business/useWavConversionPolling';
 export { useMp4GenerationPolling } from './business/useMp4GenerationPolling';
 
-// ----------------------------------------------
-// 旧版hooks (已弃用，请使用上方的轮询hooks)
-// ----------------------------------------------
-// @deprecated use useMusicGenerationPolling instead
-export { useGenerateMusic } from './business/useGenerateMusic';
-// @deprecated use useVocalSeparationPolling instead
-export { useVocalRemoval } from './business/useVocalRemoval';
-// @deprecated use useMusicExtensionPolling instead
-export { useMusicExtension } from './business/useMusicExtension';
-// @deprecated use useMp4GenerationPolling instead
-export { useMp4Generation } from './business/useMp4Generation';
-// @deprecated use useWavConversionPolling instead
-export { useWavConversion } from './business/useWavConversion';
-export { useWavFileConversion } from './business/useWavFileConversion'; 

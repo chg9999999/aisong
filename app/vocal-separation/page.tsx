@@ -35,6 +35,7 @@ interface MusicTrack {
   audio_url: string
   duration: number
   image_url?: string
+  task_id?: string
 }
 
 export default function VocalSeparationPage() {
@@ -78,10 +79,22 @@ export default function VocalSeparationPage() {
     if (!selectedTrack) return;
     
     try {
-      await separateVocals({
-        audioId: 'id' in selectedTrack ? selectedTrack.id : "",
-        taskId: 'id' in selectedTrack ? selectedTrack.id : undefined
-      });
+      // 根据API要求，必须同时提供 taskId 和 audioId
+      // 如果是已有的音乐记录，从其中获取相关ID
+      if ('id' in selectedTrack) {
+        // 如果存在 task_id 属性，则使用它作为 taskId，否则使用 id 作为 taskId
+        const taskId = selectedTrack.task_id || selectedTrack.id;
+        const audioId = selectedTrack.id;
+
+        await separateVocals({
+          taskId,
+          audioId
+        });
+      } else {
+        // 对于文件上传的情况，需要先上传文件并获取 ID
+        console.error('File upload for vocal separation is not implemented yet');
+        // 这里应该实现文件上传逻辑，然后获取返回的ID用于分离
+      }
     } catch (error) {
       console.error('Error starting vocal separation process:', error);
     }

@@ -20,6 +20,7 @@ interface MusicTrack {
   audio_url: string
   duration: number
   image_url?: string
+  task_id?: string
 }
 
 export default function WavConversionPage() {
@@ -55,10 +56,10 @@ export default function WavConversionPage() {
     if (!selectedTrack) return
 
     try {
-      // 准备参数
+      // 根据数据库结构，id对应audioId，task_id对应taskId
       const params = {
-        audioId: 'id' in selectedTrack ? selectedTrack.id : '',
-        taskId: 'id' in selectedTrack ? selectedTrack.id : undefined
+        taskId: 'id' in selectedTrack ? (selectedTrack.task_id || selectedTrack.id) : "", // 优先使用task_id，如果不存在则使用id
+        audioId: 'id' in selectedTrack ? selectedTrack.id : ''
       };
       
       // 启动转换任务
@@ -307,4 +308,3 @@ function formatDuration(duration: number) {
   const seconds = Math.floor(duration % 60)
   return `${minutes}:${seconds.toString().padStart(2, '0')}`
 }
-

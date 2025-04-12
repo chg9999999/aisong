@@ -11,8 +11,9 @@ import { VocalRemovalResult } from '@/types/music';
 
 // 人声分离参数
 export interface VocalSeparationParams {
-  audioId: string;
-  taskId?: string;
+  audioId: string; // 必需
+  taskId: string;  // 必需
+  callBackUrl?: string; // 可选，但我们使用轮询方式，不需要回调
 }
 
 // 人声分离任务状态API响应

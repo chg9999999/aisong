@@ -19,6 +19,7 @@ interface MusicTrack {
   audio_url: string
   duration: number
   image_url?: string
+  task_id?: string
 }
 
 interface MusicUploaderProps {
@@ -41,7 +42,7 @@ export function MusicUploader({ onSelect, selectedTrack, className = "" }: Music
     try {
       const { data, error } = await supabase
         .from('music_tracks')
-        .select('id, title, audio_url, duration, image_url')
+        .select('id, title, audio_url, duration, image_url, task_id')
         .order('created_at', { ascending: false })
         .limit(50)
 

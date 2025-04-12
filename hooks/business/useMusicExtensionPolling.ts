@@ -6,9 +6,8 @@
  */
 
 import { useState, useCallback } from 'react';
-import { useTaskPolling } from '../useTaskPolling';
+import { useTaskPolling } from '@/hooks/useTaskPolling';
 import { AudioData } from '@/types/api';
-import { MusicResource } from '@/types/music';
 
 // 音乐扩展参数
 export interface MusicExtensionParams {
@@ -22,13 +21,31 @@ export interface MusicExtensionParams {
   negativeTags?: string;
 }
 
+// 音乐资源类型定义
+export interface MusicResource {
+  id: string;
+  audioUrl: string;
+  sourceAudioUrl?: string;
+  streamAudioUrl?: string;
+  sourceStreamAudioUrl?: string;
+  imageUrl?: string;
+  sourceImageUrl?: string;
+  prompt?: string;
+  modelName?: string;
+  title: string;
+  tags?: string;
+  createTime?: number;
+  duration: number;
+}
+
 // 音乐扩展结果类型
 export interface MusicExtensionResult {
   taskId: string;
-  originalAudioId: string;
-  extendedMusic: MusicResource;
-  continueAtPosition: number;
-  createdAt: string;
+  originalAudioId?: string;
+  // 使用sunoData数组替换extendedMusic
+  sunoData: MusicResource[];
+  continueAtPosition?: number;
+  createdAt?: string;
 }
 
 // API响应类型
@@ -202,7 +219,7 @@ export function useMusicExtensionPolling() {
     // 进度信息 - 从轮询响应中提取
     progress: {
       textGenerated: result?.createdAt ? true : false,
-      firstAudioGenerated: result?.extendedMusic ? true : false
+      firstAudioGenerated: result?.sunoData && result.sunoData.length > 0 ? true : false
     }
   };
 } 

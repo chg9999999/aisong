@@ -251,14 +251,9 @@ export interface VocalRemovalTaskInfo {
 export interface Mp4GenerationParams {
   taskId: string;
   audioId: string;
-  caption?: string;
-  captionMode?: 'lyrics' | 'none' | 'custom';
-  prompt?: string;
-  style?: string;
-  outputFormat?: string;
-  title?: string;
-  negative_prompt?: string;
   callBackUrl?: string;
+  author?: string;
+  domainName?: string;
 }
 
 // MP4视频生成响应
