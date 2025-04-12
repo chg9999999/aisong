@@ -51,8 +51,32 @@ export function AuthProvider({ children }) {
   const handleSession = async (session) => {
     if (session?.user) {
       setUser(session.user);
+      
       // 获取用户资料
-      await fetchProfile(session.user.id);
+      const { data: profileData, error: profileError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', session.user.id)
+        .single();
+        
+      if (profileError || !profileData) {
+        // 如果没找到资料，立即创建一个
+        const { error: insertError } = await supabase
+          .from('profiles')
+          .insert({
+            id: session.user.id,
+            username: session.user.email ? session.user.email.split('@')[0] : `user_${session.user.id.substring(0, 8)}`,
+            email: session.user.email,
+            avatar_url: session.user.user_metadata?.avatar_url || null
+          });
+          
+        if (!insertError) {
+          // 重新获取刚创建的资料
+          await fetchProfile(session.user.id);
+        }
+      } else {
+        setProfile(profileData);
+      }
     } else {
       setUser(null);
       setProfile(null);
@@ -72,10 +96,8 @@ export function AuthProvider({ children }) {
       
       if (data) {
         setProfile(data);
-      } else {
-        // 处理首次登录但未创建资料的情况
-        console.log('用户资料不存在，可能是首次登录');
       }
+      // 不再需要处理资料不存在的情况，handleSession已经处理
     } catch (err) {
       console.error('获取用户资料错误:', err);
       setError('获取用户资料失败');
@@ -96,6 +118,9 @@ export function AuthProvider({ children }) {
       });
       
       if (error) throw error;
+      
+      // 不再手动创建用户资料，依赖handleSession中的自动创建机制
+      
       return { data, error: null };
     } catch (err) {
       console.error('注册错误:', err);

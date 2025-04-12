@@ -55,8 +55,22 @@ export default function LoginPage() {
           throw new Error('Passwords do not match');
         }
         
-        const { error } = await signUp(email, password);
-        if (error) throw error;
+        // 创建基本的用户元数据
+        const metadata = {
+          username: email.split('@')[0], // 默认使用邮箱前缀作为用户名
+        };
+        
+        const { error } = await signUp(email, password, metadata);
+        if (error) {
+          // 处理常见的错误
+          if (error.message.includes('User already registered')) {
+            throw new Error('This email is already registered');
+          } else if (error.message.includes('Database error')) {
+            throw new Error('There was a problem creating your account. Please try again later.');
+          } else {
+            throw error;
+          }
+        }
         
         // 注册后显示确认消息
         setSuccessMessage('Registration successful! Please check your email to confirm your account.');
