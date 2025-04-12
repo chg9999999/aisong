@@ -567,6 +567,9 @@ export default function Home() {
                     <RefreshCw className="h-6 w-6 text-purple-400" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-200">Music Extension</h3>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge className="bg-indigo-600 text-white font-medium">Coming Soon</Badge>
+                  </div>
                   <p className="text-gray-400">
                     Intelligently extend existing audio clips while maintaining stylistic consistency to create longer,
                     complete works.
@@ -586,11 +589,17 @@ export default function Home() {
                     </li>
                   </ul>
                   <div className="pt-2">
-                    <Link href="/music-extension">
-                      <Button className="bg-black/30 backdrop-blur-xl border border-purple-500/20 hover:bg-purple-900/30 hover:border-purple-500/40 text-gray-300 transition-all duration-300">
-                        Extend Music <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </Link>
+                    <Button 
+                      className="bg-black/30 backdrop-blur-xl border border-purple-500/20 hover:bg-purple-900/30 hover:border-purple-500/40 text-gray-300 transition-all duration-300"
+                      onClick={() => {
+                        toast({
+                          title: "Coming Soon",
+                          description: "The Music Extension feature is currently under development and will be available soon!",
+                        });
+                      }}
+                    >
+                      Extend Music <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -626,6 +635,9 @@ export default function Home() {
                     <FileAudio className="h-6 w-6 text-purple-400" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-200">WAV Conversion</h3>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge className="bg-indigo-600 text-white font-medium">Coming Soon</Badge>
+                  </div>
                   <p className="text-gray-400">
                     Convert AI-generated music to professional-grade WAV format for higher quality, suitable for
                     professional production.
@@ -645,11 +657,17 @@ export default function Home() {
                     </li>
                   </ul>
                   <div className="pt-2">
-                    <Link href="/wav-conversion">
-                      <Button className="bg-black/30 backdrop-blur-xl border border-purple-500/20 hover:bg-purple-900/30 hover:border-purple-500/40 text-gray-300 transition-all duration-300">
-                        Convert Audio <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </Link>
+                    <Button 
+                      className="bg-black/30 backdrop-blur-xl border border-purple-500/20 hover:bg-purple-900/30 hover:border-purple-500/40 text-gray-300 transition-all duration-300"
+                      onClick={() => {
+                        toast({
+                          title: "Coming Soon",
+                          description: "The WAV Conversion feature is currently under development and will be available soon!",
+                        });
+                      }}
+                    >
+                      Convert Audio <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -663,6 +681,9 @@ export default function Home() {
                     <Video className="h-6 w-6 text-purple-400" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-200">MP4 Video Generation</h3>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge className="bg-indigo-600 text-white font-medium">Coming Soon</Badge>
+                  </div>
                   <p className="text-gray-400">
                     Automatically create video content based on AI-generated music, adding visual effects perfect for
                     social media sharing.
@@ -682,11 +703,17 @@ export default function Home() {
                     </li>
                   </ul>
                   <div className="pt-2">
-                    <Link href="/video-generation">
-                      <Button className="bg-black/30 backdrop-blur-xl border border-purple-500/20 hover:bg-purple-900/30 hover:border-purple-500/40 text-gray-300 transition-all duration-300">
-                        Create Video <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </Link>
+                    <Button 
+                      className="bg-black/30 backdrop-blur-xl border border-purple-500/20 hover:bg-purple-900/30 hover:border-purple-500/40 text-gray-300 transition-all duration-300"
+                      onClick={() => {
+                        toast({
+                          title: "Coming Soon",
+                          description: "The MP4 Video Generation feature is currently under development and will be available soon!",
+                        });
+                      }}
+                    >
+                      Create Video <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
                   </div>
                 </div>
               </div>
